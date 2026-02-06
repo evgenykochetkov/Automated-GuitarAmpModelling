@@ -31,7 +31,7 @@ prsr.add_argument('--save_location', '-sloc', default='Results', help='Directory
 prsr.add_argument('--load_model', '-lm', default=True, help='load a pretrained model if it is found')
 
 # pre-processing of the training/val/test data
-prsr.add_argument('--segment_length', '-slen', type=int, default=22050, help='Training audio segment length in samples')
+prsr.add_argument('--segment_length', '-slen', type=int, default=24000, help='Training audio segment length in samples')
 
 # number of epochs and validation
 prsr.add_argument('--epochs', '-eps', type=int, default=2000, help='Max number of training epochs to run')
@@ -173,7 +173,7 @@ if __name__ == "__main__":
     # Load dataset
     dataset = dataset.DataSet(data_dir='Data')
 
-    dataset.create_subset('train', frame_len=22050)
+    dataset.create_subset('train', frame_len=24000)
     dataset.load_file(os.path.join('train', args.file_name), 'train')
 
     dataset.create_subset('val')

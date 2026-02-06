@@ -93,7 +93,7 @@ def main(args):
     # Load dataset
     dataset = CAMLdataset.DataSet(data_dir='Data')
 
-    dataset.create_subset('train', frame_len=22050)
+    dataset.create_subset('train', frame_len=24000)
     dataset.load_file(os.path.join('train', args.file_name), 'train')
 
     dataset.create_subset('val')
@@ -222,7 +222,7 @@ if __name__ == "__main__":
     prsr.add_argument('--seed', default=None, type=int, help='seed all of the random number generators if desired')
 
     # pre-processing of the training/val/test data
-    prsr.add_argument('--segment_length', '-slen', type=int, default=22050, help='Training audio segment length in samples')
+    prsr.add_argument('--segment_length', '-slen', type=int, default=24000, help='Training audio segment length in samples')
 
     # number of epochs and validation
     prsr.add_argument('--epochs', '-eps', type=int, default=2000, help='Max number of training epochs to run')
