@@ -254,9 +254,9 @@ if __name__ == "__main__":
 
     # the validation and test sets are divided into shorter chunks before processing to reduce the amount of GPU memory used
     # you can probably ignore this unless during training you get a 'cuda out of memory' error
-    prsr.add_argument('--val_chunk', '-vs', type=int, default=100000, help='Number of sequence samples to process'
+    prsr.add_argument('--val_chunk', '-vs', type=int, default=64000, help='Number of sequence samples to process'
                                                                                    'in each chunk of validation ')
-    prsr.add_argument('--test_chunk', '-tc', type=int, default=100000, help='Number of sequence samples to process'
+    prsr.add_argument('--test_chunk', '-tc', type=int, default=64000, help='Number of sequence samples to process'
                                                                                    'in each chunk of validation ')
 
     # arguments for the network structure
