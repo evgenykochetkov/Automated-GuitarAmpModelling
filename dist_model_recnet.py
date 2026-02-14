@@ -77,7 +77,7 @@ def main(args):
         print('cuda device not available/not selected')
         cuda = 0
     else:
-        torch.set_default_tensor_type('torch.cuda.FloatTensor')
+        torch.set_default_device('cuda')
         torch.cuda.set_device(0)
         print('cuda device available')
         network = network.cuda()
