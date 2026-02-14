@@ -44,3 +44,5 @@ Data/*
 !Data/val/muff-target.wav
 Recordings/
 runs2/
+
+.venv/
