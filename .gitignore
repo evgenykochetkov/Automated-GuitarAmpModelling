@@ -42,6 +42,9 @@ Data/*
 !Data/test/muff-target.wav
 !Data/val/muff-input.wav
 !Data/val/muff-target.wav
+
+!Data/sunn_beta_fuzz.wav
+
 Recordings/
 runs2/
 
