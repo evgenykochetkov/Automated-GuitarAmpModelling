@@ -116,7 +116,9 @@ def main(args):
                                          dataset.subsets['train'].data['target'][0],
                                          loss_functions, optimiser, args.batch_size, args.init_len, args.up_fr)
 
-        writer.add_scalar('Time/EpochTrainingTime', time.time()-ep_st_time, epoch)
+        ep_time = time.time() - ep_st_time
+        print(f"  training loss: {epoch_loss.item():7f} (time: {ep_time:.3f}s)")
+        writer.add_scalar('Time/EpochTrainingTime', ep_time, epoch)
 
         # Run validation
         if epoch % args.validation_f == 0:
@@ -124,12 +126,17 @@ def main(args):
             val_output, val_loss = network.process_data(dataset.subsets['val'].data['input'][0],
                                              dataset.subsets['val'].data['target'][0], loss_functions, args.val_chunk)
             scheduler.step(val_loss)
-            print("Val loss:", val_loss)
+            val_time = time.time() - val_ep_st_time
+            print(f"  validation loss: {val_loss.item():7f} (time: {val_time:.3f}s)")
+
             if val_loss < train_track['best_val_loss']:
                 patience_counter = 0
+                save_st_time = time.time()
                 network.save_model('model_best', save_path)
                 write(os.path.join(save_path, "best_val_out.wav"),
                       dataset.subsets['val'].fs, val_output.cpu().numpy()[:, 0, 0])
+                save_time = time.time() - save_st_time
+                print(f"  new best model saved (time: {save_time:.3f}s)")
             else:
                 patience_counter += 1
             train_track.val_epoch_update(val_loss.item(), val_ep_st_time, time.time())
